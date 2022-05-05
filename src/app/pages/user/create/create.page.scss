@@ -1,0 +1,31 @@
+:host {
+
+    // ion-icon {
+    //     align-self: center;
+    // }
+
+    ion-card {
+        // height: 400px;
+        // width: 450px;
+        // background-color: silver;
+    }
+    
+    ion-icon {
+        color: black;
+    }
+
+    ion-item {
+        // --background: rgb(32, 39, 23);
+        &:hover {
+            // --background-hover: rgb(120, 224, 172);
+        }
+    }
+
+    ion-input {
+        // --color: black;
+    }
+
+    .item-md.item-input.input-has-focus .item-inner {
+    }
+
+}

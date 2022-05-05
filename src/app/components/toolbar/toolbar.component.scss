@@ -1,0 +1,59 @@
+    .toolbarTitle h1{
+        color: white;
+        font-size: 3vh;
+    }
+
+@media screen and (min-width: 280px) and (max-width: 540px) {
+
+    .toolbarWrapperDiv {
+        display: flex;
+        align-items: center;
+    }
+
+    #toolbarlogo{
+        height: 100px;
+        width: auto;
+        float: left;
+        padding: 30px 30px 30px 30px;
+    }
+
+    .toolbarTitle h1{
+        padding-left: 10%;
+    }
+
+    .toolbarIonButtons{
+        justify-content: space-between;
+    }
+
+    .toolbarIonButtons p {
+        color: white;
+    }
+}
+
+
+@media screen and (min-width: 541px) and (max-width: 1920px) {
+
+    .toolbarWrapperDiv {
+        display: flex;
+    }
+
+    #toolbarlogo{
+        height: 100px;
+        width: auto;
+        float: left;
+    }
+
+
+    .toolbarTitle h1{
+        align-self: center;
+        padding-left: 41%;
+    }
+
+    .toolbarIonButtons{
+        justify-content: space-between;
+    }
+
+    .toolbarIonButtons p {
+        color: white;
+    }
+}

@@ -1,0 +1,62 @@
+.contentContainerDiv {
+    background-image: url("https://www.macobserver.com/wp-content/uploads/2019/05/workfeatured-data.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.loginCard{
+  // border: 1px solid black;
+
+    background:rgb(119, 75, 75);
+    border-radius: 5px;
+    box-shadow: 0 1.5px 0 0 
+    rgba(0,0,0,0.1);
+    width:450px;
+    display: flex;  
+    flex-direction: column;
+}
+
+.cardTitle {
+  // font-family: "museo-slab";  
+  color: white;
+  font-size:60px;
+  text-align: center;
+  padding: 20px 20px 0;
+  margin:0;
+}
+
+
+.formDiv{
+  color: #ffff;
+	padding:25px 25px 0;
+	margin: 20px 20px 0;	
+	border-radius: 3px;
+}
+
+.ionItemUser {
+  margin-bottom: 2rem;
+}
+
+.forgotPasswordHref {
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.forgotPassDiv {
+  display: flex;
+  justify-content: center;
+}
+
+.submitButton {
+    margin-top: 20px;
+    color:rgb(119, 75, 75);
+}
+
+.forgotPasswordHref {
+    color: white;
+}

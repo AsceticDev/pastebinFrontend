@@ -1,0 +1,51 @@
+<app-toolbar></app-toolbar>
+
+<ion-content>
+  <div class="contentContainerDiv">
+
+    <ion-card class="bg-gray-100 sm:bg-yellow-300 md:bg-green-300 lg:bg-pink-300 xl:bg-blue-300">
+      <ion-card-header>
+        <ion-card-title class="pb-5 text-4xl text-center">Create User</ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="ionCardContent">
+
+        <div class="formDiv">
+          <form class="form" [formGroup]="ionicForm" (ngSubmit)="createUser()" novalidate>
+
+            <ion-item id="item" class="ionItemEmail">
+              <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+              <ion-label position="floating">
+                Email
+              </ion-label>
+              <ion-input class="emailInput" formControlName="email" type="email" autocomplete="email" placeholder="youremail@aol.com"> 
+              </ion-input>
+            </ion-item>
+
+            <ion-item id="item" class="ionItemUsername" lines="full">
+              <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+              <ion-label position="floating">Username</ion-label>
+              <ion-input class="usernameInput" formControlName="username" type="username" placeholder="input username"></ion-input>
+            </ion-item>
+
+            <ion-item id="item" class="ionItemPassword" lines="full">
+              <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+              <ion-label position="floating">Password</ion-label>
+              <ion-input class="passwordInput" formControlName="password" type="password"  placeholder="input password"></ion-input>
+            </ion-item>
+
+            <ion-row class="pt-5">
+              <ion-col>
+                <ion-button type="submit" color="danger" expand="block" class="shadow-lg">Submit</ion-button>
+              </ion-col>
+            </ion-row>
+
+          </form>
+
+
+        </div>
+
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+</ion-content>
