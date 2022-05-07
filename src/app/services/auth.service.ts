@@ -35,7 +35,6 @@ export class AuthService {
           }),
         mapTo(true),
         catchError(error => {
-          // this.presentLoginFailedAlert();
           this.presentToast(error);
           console.log(error);
           return of(false);
@@ -129,13 +128,24 @@ export class AuthService {
 
 
   async presentToast(error) {
-    const toast = await this.toastController.create({
-      message: error.error.msg,
-      icon: 'close-circle-outline',
-      color: 'dark',
-      position: 'bottom',
-      duration: 6000
-    });
-    toast.present();
+    if (error.error.msg){
+      const toast = await this.toastController.create({
+        message: error.error.msg,
+        icon: 'close-circle-outline',
+        color: 'dark',
+        position: 'bottom',
+        duration: 6000
+      });
+      toast.present();
+    } else {
+        const toast = await this.toastController.create({
+        message: error.error.message,
+        icon: 'close-circle-outline',
+        color: 'dark',
+        position: 'bottom',
+        duration: 6000
+      });
+      toast.present();
+    }
   }
 }

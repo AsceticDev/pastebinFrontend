@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { catchError, mapTo, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { ToastController } from '@ionic/angular';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +14,15 @@ export class UserService {
 
   constructor(
     private http: HttpClient,
-    private router: Router,
-    public toastController: ToastController
+    public toastController: ToastController,
+    public authService: AuthService
   ) { }
 
 
 
   public createUser(userForm) {
     let headers = new HttpHeaders();
-    const auth_token = localStorage.getItem('access_token');
+    const auth_token = this.authService.getJwtToken();
     headers = headers.set('Authorization', `Bearer ${auth_token}`);
 
     return this.http.post<any>(this.baseUrl+'/api/v1/users', userForm, { headers })
@@ -45,7 +46,7 @@ export class UserService {
 
   public getUser(userId){
     let headers = new HttpHeaders();
-    const auth_token = localStorage.getItem('access_token');
+    const auth_token = this.authService.getJwtToken();
     headers = headers.set('Authorization', `Bearer ${auth_token}`);
 
     return this.http.get<any>(this.baseUrl + '/api/v1/users/' + userId, { headers })
@@ -67,7 +68,7 @@ export class UserService {
 
   public getAllUsers(paginationUrl) {
     let headers = new HttpHeaders();
-    const auth_token = localStorage.getItem('access_token');
+    const auth_token = this.authService.getJwtToken();
     headers = headers.set('Authorization', `Bearer ${auth_token}`);
 
     return this.http.get(this.baseUrl+paginationUrl, { headers })
@@ -90,7 +91,7 @@ export class UserService {
   public updateUser(id: any, postData) {
 
     let headers = new HttpHeaders();
-    const auth_token = localStorage.getItem('access_token');
+    const auth_token = this.authService.getJwtToken();
     headers = headers.set('Authorization', `Bearer ${auth_token}`);
 
     return this.http.put(this.baseUrl + `/${id}`, postData, { headers })
@@ -112,7 +113,7 @@ export class UserService {
 
   public deleteUser(id: any) {
     let headers = new HttpHeaders();
-    const auth_token = localStorage.getItem('access_token');
+    const auth_token = this.authService.getJwtToken();
     headers = headers.set('Authorization', `Bearer ${auth_token}`);
 
     return this.http.delete(this.baseUrl + `/${id}`, { headers })

@@ -36,6 +36,7 @@ export class CreatePage implements OnInit {
       console.log('Please provide all required fields');
       return false;
     } else {
+      console.log('form here: ', this.ionicForm);
       this.userService.createUser(this.ionicForm.value).subscribe(
         (success: any) => {
           if(success === false) {

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { catchError, mapTo, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { ToastController } from '@ionic/angular';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +15,13 @@ export class PasteService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    public toastController: ToastController
+    public toastController: ToastController,
+    public authService: AuthService
   ) { }
 
   createPaste(pasteForm) {
     let headers = new HttpHeaders();
-    const auth_token = localStorage.getItem('access_token');
+    const auth_token = this.authService.getJwtToken();
     headers = headers.set('Authorization', `Bearer ${auth_token}`);
 
     return this.http.post<any>(this.baseUrl+'/api/v1/pastes', pasteForm, {headers})
@@ -41,7 +43,7 @@ export class PasteService {
 
   getPaste(pasteId) {
     let headers = new HttpHeaders();
-    const auth_token = localStorage.getItem('access_token');
+    const auth_token = this.authService.getJwtToken();
     headers = headers.set('Authorization', `Bearer ${auth_token}`);
 
     return this.http.get<any>(this.baseUrl+'/api/v1/pastes'+pasteId, {headers})
@@ -63,7 +65,7 @@ export class PasteService {
 
   getAllPastes(paginationUrl) {
     let headers = new HttpHeaders();
-    const auth_token = localStorage.getItem('access_token');
+    const auth_token = this.authService.getJwtToken();
     headers = headers.set('Authorization', `Bearer ${auth_token}`);
 
     return this.http.get<any>(this.baseUrl+paginationUrl, {headers})
@@ -85,7 +87,7 @@ export class PasteService {
 
   updatePaste(id: any, pasteData) {
     let headers = new HttpHeaders();
-    const auth_token = localStorage.getItem('access_token');
+    const auth_token = this.authService.getJwtToken();
     headers = headers.set('Authorization', `Bearer ${auth_token}`);
 
     return this.http.put<any>(this.baseUrl+`/${id}`, pasteData, {headers})
@@ -107,7 +109,7 @@ export class PasteService {
 
   deletePaste(id: any) {
     let headers = new HttpHeaders();
-    const auth_token = localStorage.getItem('access_token');
+    const auth_token = this.authService.getJwtToken();
     headers = headers.set('Authorization', `Bearer ${auth_token}`);
 
     return this.http.delete<any>(this.baseUrl+`/${id}`, {headers})

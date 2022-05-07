@@ -1,51 +1,41 @@
 <app-toolbar></app-toolbar>
 
-<ion-content>
-  <div class="contentContainerDiv">
+<ion-content mode="md" class="" style="--background: url('https://www.pngmagic.com/product_images/website-background-image-size-psd-vector-photo.jpg')" >
+  <ion-card class="mx-auto lg:top-1/3 md:w-1/3 top-1/3 sm:w-full top-auto">
+    <ion-card-header class="flex flex-row justify-center">
+      <ion-card-title class="text-3xl">Create User</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
 
-    <ion-card class="bg-gray-100 sm:bg-yellow-300 md:bg-green-300 lg:bg-pink-300 xl:bg-blue-300">
-      <ion-card-header>
-        <ion-card-title class="pb-5 text-4xl text-center">Create User</ion-card-title>
-      </ion-card-header>
-      <ion-card-content class="ionCardContent">
+      <form [formGroup]="ionicForm" (ngSubmit)="createUser()" class="" novalidate>
 
-        <div class="formDiv">
-          <form class="form" [formGroup]="ionicForm" (ngSubmit)="createUser()" novalidate>
+        <ion-item class="">
+          <ion-label position="floating">Username</ion-label>
+          <ion-icon slot="start" size="large" name="person" slot="start"></ion-icon>
+          <ion-input class="" formControlName="username" autocomplete="username" placeholder="Username">
+          </ion-input>
+        </ion-item>
 
-            <ion-item id="item" class="ionItemEmail">
-              <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
-              <ion-label position="floating">
-                Email
-              </ion-label>
-              <ion-input class="emailInput" formControlName="email" type="email" autocomplete="email" placeholder="youremail@aol.com"> 
-              </ion-input>
-            </ion-item>
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-icon slot="start" size="large" name="mail" slot="start">
+          </ion-icon>
+          <ion-input formControlName="email" autocomplete="youremail@provider.com" type="email" placeholder="youremail@provider.com">
+          </ion-input>
+        </ion-item>
 
-            <ion-item id="item" class="ionItemUsername" lines="full">
-              <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
-              <ion-label position="floating">Username</ion-label>
-              <ion-input class="usernameInput" formControlName="username" type="username" placeholder="input username"></ion-input>
-            </ion-item>
+        <ion-item>
+          <ion-label position="floating">Password</ion-label>
+          <ion-icon slot="start" size="large" name="lock-closed" slot="start">
+          </ion-icon>
+          <ion-input formControlName="password" autocomplete="current-password" type="password" placeholder="Password">
+          </ion-input>
+        </ion-item>
 
-            <ion-item id="item" class="ionItemPassword" lines="full">
-              <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
-              <ion-label position="floating">Password</ion-label>
-              <ion-input class="passwordInput" formControlName="password" type="password"  placeholder="input password"></ion-input>
-            </ion-item>
+        <ion-button type="submit" color="primary" expand="block">Register</ion-button>
+      </form>
 
-            <ion-row class="pt-5">
-              <ion-col>
-                <ion-button type="submit" color="danger" expand="block" class="shadow-lg">Submit</ion-button>
-              </ion-col>
-            </ion-row>
+    </ion-card-content>
+  </ion-card>
 
-          </form>
-
-
-        </div>
-
-      </ion-card-content>
-    </ion-card>
-
-  </div>
 </ion-content>
