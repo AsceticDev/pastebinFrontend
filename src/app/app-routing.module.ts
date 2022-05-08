@@ -22,7 +22,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/user/create/create.module').then( m => m.CreatePageModule)
   },
   {
-    path: 'user/details',
+    path: 'user/details/:userId',
     loadChildren: () => import('./pages/user/details/details.module').then( m => m.DetailsPageModule)
   },
   {

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-details',
@@ -6,10 +8,34 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./details.page.scss'],
 })
 export class DetailsPage implements OnInit {
+  public userId: any;
 
-  constructor() { }
+  constructor(
+    public activatedRoute: ActivatedRoute,
+    public userService: UserService
+  ) { }
 
   ngOnInit() {
+    this.userId = this.activatedRoute.snapshot.params.userId;
+    this.getUserData(this.userId);
+  }
+
+  getUserData(userid) {
+    this.userService.getUser(userid).subscribe(
+      (success: any) => {
+        if(success === false) {
+          console.log('failed getting user data.');
+        } else {
+          console.log('getting user data success', success);
+        }
+      }, (error: any) => {
+        console.log('failed getting user data.', error);
+      }
+    )
+  }
+
+  someBullshit() {
+    console.log(this.userService.userDetailsStorage);
   }
 
 }

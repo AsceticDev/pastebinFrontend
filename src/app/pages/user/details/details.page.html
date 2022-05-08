@@ -1,9 +1,26 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>details</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-toolbar></app-toolbar>
 
-<ion-content>
+<ion-content mode="md" class="" style="--background: url('https://www.pngmagic.com/product_images/website-background-image-size-psd-vector-photo.jpg')" >
+  <ion-card class="mx-auto lg:top-1/3 md:w-1/3 top-1/3 sm:w-full top-auto">
+    <ion-card-header class="flex flex-row justify-center">
+      <ion-card-title class="text-3xl">User Details</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+
+      <ion-item>
+        <ion-label>Username</ion-label>
+        {{userService.userDetailsStorage.username}}
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Email</ion-label>
+        {{userService.userDetailsStorage.email}}
+      </ion-item>
+
+
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>
+
+

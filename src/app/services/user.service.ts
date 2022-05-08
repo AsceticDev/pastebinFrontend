@@ -11,6 +11,7 @@ import { AuthService } from './auth.service';
 })
 export class UserService {
   public baseUrl = 'http://localhost:5000';
+  public userDetailsStorage = [];
 
   constructor(
     private http: HttpClient,
@@ -53,7 +54,8 @@ export class UserService {
     .pipe(
       tap(
         res=> {
-          console.log(res);
+          console.log('res here: ',res);
+          this.userDetailsStorage = res.user;
           console.log('getting user');
         }
       ),
