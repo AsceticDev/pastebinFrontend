@@ -12,6 +12,7 @@ import { AuthService } from './auth.service';
 export class UserService {
   public baseUrl = 'http://localhost:5000';
   public userDetailsStorage = [];
+  public userList: any = [];
 
   constructor(
     private http: HttpClient,
@@ -26,7 +27,7 @@ export class UserService {
     const auth_token = this.authService.getJwtToken();
     headers = headers.set('Authorization', `Bearer ${auth_token}`);
 
-    return this.http.post<any>(this.baseUrl+'/api/v1/users', userForm, { headers })
+    return this.http.post<any>(this.baseUrl + '/api/v1/users', userForm, { headers })
       .pipe(
         tap(
           res => {
@@ -53,7 +54,7 @@ export class UserService {
     return this.http.get<any>(this.baseUrl + '/api/v1/users/' + userId, { headers })
     .pipe(
       tap(
-        res=> {
+        res => {
           console.log('res here: ',res);
           this.userDetailsStorage = res.user;
           console.log('getting user');
@@ -73,17 +74,18 @@ export class UserService {
     const auth_token = this.authService.getJwtToken();
     headers = headers.set('Authorization', `Bearer ${auth_token}`);
 
-    return this.http.get(this.baseUrl+paginationUrl, { headers })
+    return this.http.get<any>(this.baseUrl + paginationUrl, { headers })
     .pipe(
       tap(
-        res=> {
-          console.log(res);
-          console.log('getting all user');
+        res => {
+          console.log('res here: ',res);
+          this.userList = res;
+          console.log('getting user list');
         }
       ),
       mapTo(true),
       catchError(error => {
-        console.log(error);
+        console.log('error getting user list: ', error);
         this.presentToast(error);
         return of(false);
       })

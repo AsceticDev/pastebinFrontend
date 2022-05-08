@@ -1,9 +1,19 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>list</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-toolbar></app-toolbar>
 
-<ion-content>
+<ion-content mode="md" class="" style="--background: url('https://www.pngmagic.com/product_images/website-background-image-size-psd-vector-photo.jpg')" >
+  <ion-card class="mx-auto lg:top-1/3 md:w-1/3 top-1/3 sm:w-full top-auto">
+    <ion-card-header class="flex flex-row justify-center">
+      <ion-card-title class="text-3xl">User List</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+
+      <ion-item class="hover:bg-sky-700" (click)=goToUser(user.id) *ngFor="let user of userService.userList.results">
+        <ion-label>{{user.username}}</ion-label>
+        {{user.email}}
+      </ion-item>
+
+
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>
