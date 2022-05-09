@@ -34,8 +34,4 @@ export class DetailsPage implements OnInit {
     )
   }
 
-  someBullshit() {
-    console.log(this.userService.userDetailsStorage);
-  }
-
 }

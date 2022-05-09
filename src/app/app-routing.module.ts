@@ -34,7 +34,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/paste/create/create.module').then( m => m.CreatePageModule)
   },
   {
-    path: 'paste/details',
+    path: 'paste/details/:pasteId',
     loadChildren: () => import('./pages/paste/details/details.module').then( m => m.DetailsPageModule)
   },
   {

@@ -11,6 +11,8 @@ import { AuthService } from './auth.service';
 })
 export class PasteService {
   public baseUrl = 'http://localhost:5000';
+  public pasteDetailsStorage = [];
+  public pasteList: any = [];
 
   constructor(
     private http: HttpClient,
@@ -46,11 +48,11 @@ export class PasteService {
     const auth_token = this.authService.getJwtToken();
     headers = headers.set('Authorization', `Bearer ${auth_token}`);
 
-    return this.http.get<any>(this.baseUrl+'/api/v1/pastes'+pasteId, {headers})
+    return this.http.get<any>(this.baseUrl+'/api/v1/pastes/'+pasteId, {headers})
     .pipe(
       tap(
         res => {
-          console.log(res);
+          this.pasteDetailsStorage = res.paste;
           console.log('getting paste');
         }
       ),
@@ -73,6 +75,7 @@ export class PasteService {
       tap(
         res => {
           console.log(res);
+          this.pasteList = res;
           console.log('getting all pastes');
         }
       ),

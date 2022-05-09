@@ -1,9 +1,32 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>create</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-toolbar></app-toolbar>
 
-<ion-content>
+<ion-content mode="md" style="--background: url('../assets/background.jpg')">
+
+  <ion-card class="mx-auto lg:w-2/3 md:w-2/3 sm:top-auto">
+    <ion-card-header class="flex flex-row justify-center">
+      <ion-card-title class="text-3xl">Create Paste</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <form [formGroup]="ionicForm" (ngSubmit)="createPaste()" class="" novalidate>
+
+        <ion-item class="">
+          <ion-label class="" position="floating">Title</ion-label>
+          <ion-input class="" formControlName="title"  placeholder="Your Title">
+          </ion-input>
+        </ion-item>
+
+        <ion-item class="">
+          <ion-label position="floating">Content</ion-label>
+          <ion-textarea auto-grow="true" formControlName="content" placeholder="Code Goes Here..."></ion-textarea>
+        </ion-item>
+
+
+        <ion-button type="submit" color="primary" expand="block">Submit</ion-button>
+
+      </form>
+    </ion-card-content>
+  </ion-card>
+
 
 </ion-content>

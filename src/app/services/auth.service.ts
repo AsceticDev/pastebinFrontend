@@ -5,6 +5,8 @@ import { AlertController, ToastButton, ToastController } from '@ionic/angular';
 import { of, throwError } from 'rxjs';
 import { catchError, mapTo, tap } from 'rxjs/operators';
 import { Tokens } from '../guards/models/tokens';
+import jwt_decode from 'jwt-decode';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +14,15 @@ import { Tokens } from '../guards/models/tokens';
 
 export class AuthService {
   public baseUrl = 'http://localhost:5000';
-  public loggedUser: string;
+  public loggedUser: any = {};
+  public access_token;
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
 
+
   constructor(
     private http: HttpClient,
-    private router: Router,
-    public alertController: AlertController,
+    private router: Router,public alertController: AlertController,
     public toastController: ToastController
   ) { }
 
@@ -29,7 +32,8 @@ export class AuthService {
       .pipe(
         tap(
           tokens => {
-            console.log('setting token'),
+            console.log('setting token');
+ 
             this.doLoginUser(loginDict.username, tokens),
             this.router.navigate(['/home'])
           }),
@@ -55,7 +59,10 @@ export class AuthService {
   }
 
   private doLoginUser(username: string, tokens: Tokens) {
-    this.loggedUser = username;
+    const decoded_token: any = jwt_decode(tokens.access_token);
+    console.log('Decoded Token: ', decoded_token);
+    this.loggedUser.username = username;
+    this.loggedUser.id = decoded_token.sub;
     this.storeTokens(tokens);
   }
 
@@ -95,7 +102,6 @@ export class AuthService {
   }
 
   private storeTokens(tokens: Tokens) {
-    console.log('inside storeTokens, logging tokens parameter: ', tokens);
     localStorage.setItem(this.JWT_TOKEN, tokens.access_token);
     localStorage.setItem(this.REFRESH_TOKEN, tokens.refresh_token);
   }
@@ -106,6 +112,13 @@ export class AuthService {
 
   public getJwtToken() {
     return localStorage.getItem(this.JWT_TOKEN);
+  }
+
+  public getUserId() {
+    let myToken = this.getJwtToken();
+    const decoded_token: any = jwt_decode(myToken);
+    this.loggedUser.id = decoded_token.sub;
+    return this.loggedUser;
   }
 
   public isLoggedIn() {

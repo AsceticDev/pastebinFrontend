@@ -35,7 +35,6 @@ export class ListPage implements OnInit {
   }
 
   goToUser(userid) {
-    console.log(userid);
     this.router.navigate(['/user/details/' + userid]);
   }
 
