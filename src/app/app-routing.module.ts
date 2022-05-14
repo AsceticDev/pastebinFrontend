@@ -25,7 +25,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/user/create/create.module').then( m => m.CreatePageModule)
   },
   {
-    path: 'user/:userId',
+    path: 'user/details/:userId',
     canActivate: [AuthGuard],
     loadChildren: () => import('./pages/user/details/details.module').then( m => m.DetailsPageModule)
   },
@@ -40,7 +40,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/paste/create/create.module').then( m => m.CreatePageModule)
   },
   {
-    path: 'paste/:pasteId',
+    path: 'paste/details/:pasteId',
     canActivate: [AuthGuard],
     loadChildren: () => import('./pages/paste/details/details.module').then( m => m.DetailsPageModule)
   },

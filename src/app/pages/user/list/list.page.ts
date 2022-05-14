@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./list.page.scss'],
 })
 export class ListPage implements OnInit {
-  public pageUrlEndpoint = '/api/v1/users'
+  public basePaginationUrl = '/api/v1/users'
 
   constructor(
     public userService: UserService,
@@ -23,11 +23,11 @@ export class ListPage implements OnInit {
 
 
   getUserList(){
-    this.userService.getAllUsers(this.pageUrlEndpoint).subscribe();
+    this.userService.getAllUsers(this.basePaginationUrl).subscribe();
   }
 
   goToUser(userid) {
-    this.router.navigate(['/user/' + userid]);
+    this.router.navigate(['/user/details/' + userid]);
   }
 
 }
