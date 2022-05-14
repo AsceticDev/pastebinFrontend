@@ -16,19 +16,18 @@ export class AuthHeaderInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
         //Add Auth Token
-        let auth_token = this.authService.getJwtToken();
+        const auth_token = this.authService.getJwtToken();
         if(!auth_token){
             console.log('empty token');
         }
-        let reqWithAuth = null;
-        if (req.url.includes('auth/refresh')){
-            auth_token = this.authService.getRefreshToken();
-            reqWithAuth = this.addTokenHeader(req, auth_token);
-        } else {
-            reqWithAuth = this.addTokenHeader(req, auth_token);
-        }
+        let reqWithAuth = this.addTokenHeader(req, auth_token);
 
-        return next.handle(reqWithAuth)
+        if (req.url.includes('auth/refresh')){
+            const refresh_token = this.authService.getRefreshToken();
+            reqWithAuth = this.addTokenHeader(req, refresh_token);
+        } 
+
+        return next.handle(reqWithAuth);
 
     }
     //functions

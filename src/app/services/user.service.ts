@@ -52,7 +52,6 @@ export class UserService {
 
   public getAllUsers(paginationUrl) {
 
-
     return this.http.get<any>(this.baseUrl + paginationUrl)
     .pipe(
       tap(

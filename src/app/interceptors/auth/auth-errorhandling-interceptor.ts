@@ -19,7 +19,6 @@ export class AuthErrorhandlingInterceptor implements HttpInterceptor {
     ) {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        console.log('the req: ', req);
 
         return next.handle(req)
         .pipe(
@@ -32,7 +31,7 @@ export class AuthErrorhandlingInterceptor implements HttpInterceptor {
                     console.log('not login and 401 status error');
                     return this.handle401Error(req, next);
                 }else if(error instanceof HttpErrorResponse && error.status === 422) {
-                    this.handle422Error(req, next);
+                    this.handle422Error();
                 }
                 //add error handling logic here
                 console.log('request url:', req.url)
@@ -74,7 +73,7 @@ export class AuthErrorhandlingInterceptor implements HttpInterceptor {
         }
     }
 
-    private handle422Error(request: HttpRequest<any>, next: HttpHandler) {
+    private handle422Error() {
         console.log('422 error, prob empty token or expired');
         localStorage.clear();
         this.router.navigateByUrl('/login');
