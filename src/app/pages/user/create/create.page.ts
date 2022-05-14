@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class CreatePage implements OnInit {
   constructor(
     public formBuilder: FormBuilder,
     public userService: UserService,
+    public router: Router
   ) { }
 
   ngOnInit() {
@@ -39,14 +41,9 @@ export class CreatePage implements OnInit {
       console.log('form here: ', this.ionicForm);
       this.userService.createUser(this.ionicForm.value).subscribe(
         (success: any) => {
-          if(success === false) {
-            console.log('user creation failed.')
-          }else{
             console.log('user creation was successful', success)
+            this.router.navigateByUrl('/user/' + success.user.id);
           }
-        }, (error: any) => {
-          console.log('user creation failed.', error);
-        }
       );
     }
   }

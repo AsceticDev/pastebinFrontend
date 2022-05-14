@@ -23,23 +23,13 @@ export class UserService {
 
 
   public createUser(userForm) {
-    let headers = new HttpHeaders();
-    const auth_token = this.authService.getJwtToken();
-    headers = headers.set('Authorization', `Bearer ${auth_token}`);
 
-    return this.http.post<any>(this.baseUrl + '/api/v1/users', userForm, { headers })
+    return this.http.post<any>(this.baseUrl + '/api/v1/users', userForm)
       .pipe(
         tap(
           res => {
             console.log(res);
             console.log('creating user');
-          }
-        ),
-        mapTo(true),
-        catchError(error => {
-            console.log(error);
-            this.presentToast(error);
-            return of(false);
           }
         )
       )
@@ -47,11 +37,8 @@ export class UserService {
 
 
   public getUser(userId){
-    let headers = new HttpHeaders();
-    const auth_token = this.authService.getJwtToken();
-    headers = headers.set('Authorization', `Bearer ${auth_token}`);
 
-    return this.http.get<any>(this.baseUrl + '/api/v1/users/' + userId, { headers })
+    return this.http.get<any>(this.baseUrl + '/api/v1/users/' + userId)
     .pipe(
       tap(
         res => {
@@ -59,22 +46,14 @@ export class UserService {
           this.userDetailsStorage = res.user;
           console.log('getting user');
         }
-      ),
-      mapTo(true),
-      catchError(error => {
-        console.log(error);
-        this.presentToast(error);
-        return of(false);
-      })
+      )
     )
   }
 
   public getAllUsers(paginationUrl) {
-    let headers = new HttpHeaders();
-    const auth_token = this.authService.getJwtToken();
-    headers = headers.set('Authorization', `Bearer ${auth_token}`);
 
-    return this.http.get<any>(this.baseUrl + paginationUrl, { headers })
+
+    return this.http.get<any>(this.baseUrl + paginationUrl)
     .pipe(
       tap(
         res => {
@@ -82,70 +61,35 @@ export class UserService {
           this.userList = res;
           console.log('getting user list');
         }
-      ),
-      mapTo(true),
-      catchError(error => {
-        console.log('error getting user list: ', error);
-        this.presentToast(error);
-        return of(false);
-      })
+      )
     );
   }
 
   public updateUser(id: any, postData) {
 
-    let headers = new HttpHeaders();
-    const auth_token = this.authService.getJwtToken();
-    headers = headers.set('Authorization', `Bearer ${auth_token}`);
-
-    return this.http.put(this.baseUrl + `/${id}`, postData, { headers })
+    return this.http.put(this.baseUrl + `/${id}`, postData)
     .pipe(
       tap(
         res=> {
           console.log(res);
           console.log('updating user');
         }
-      ),
-      mapTo(true),
-      catchError(error => {
-        console.log(error);
-        this.presentToast(error);
-        return of(false);
-      })
+      )
     );
   }
 
   public deleteUser(id: any) {
-    let headers = new HttpHeaders();
-    const auth_token = this.authService.getJwtToken();
-    headers = headers.set('Authorization', `Bearer ${auth_token}`);
 
-    return this.http.delete(this.baseUrl + `/${id}`, { headers })
+    return this.http.delete(this.baseUrl + `/${id}`)
     .pipe(
       tap(
         res=> {
           console.log(res);
           console.log('deleting user');
         }
-      ),
-      mapTo(true),
-      catchError(error => {
-        console.log(error);
-        this.presentToast(error);
-        return of(false);
-      })
+      )
     )
   };
 
-  async presentToast(error) {
-    const toast = await this.toastController.create({
-      message: error.error.msg,
-      icon: 'close-circle-outline',
-      color: 'dark',
-      position: 'bottom',
-      duration: 6000
-    });
-    toast.present();
-  }
 
 }

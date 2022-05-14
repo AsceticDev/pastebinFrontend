@@ -37,25 +37,16 @@ export class AuthService {
             this.doLoginUser(loginDict.username, tokens),
             this.router.navigate(['/home'])
           }),
-        mapTo(true),
-        catchError(error => {
-          this.presentToast(error);
-          console.log(error);
-          return of(false);
-        }));
+      );
   }
 
 
   public logout() {
-    return this.http.post(this.baseUrl + '/auth/logout', {
+    return this.http.post(this.baseUrl + '/auth/revoke_access', {
       'refreshToken': this.getRefreshToken()
     }).pipe(
-      tap(() => this.doLogoutUser()),
-      mapTo(true),
-      catchError(error => {
-        this.presentToast(error);
-        return of(false);
-      }));
+        tap(() => this.doLogoutUser()),
+      );
   }
 
   private doLoginUser(username: string, tokens: Tokens) {
@@ -67,32 +58,28 @@ export class AuthService {
   }
 
   private doLogoutUser() {
+    console.log('logging user out');
     this.loggedUser = null;
     this.removeTokens();
   }
 
   public refreshToken() {
-    let headers = new HttpHeaders();
-    const refresh_token = this.getRefreshToken();
-    headers = headers.set('Authorization', `Bearer ${refresh_token}`);
 
-    console.log('we\'re firing off the testRefreshToken()!')
-    return this.http.post(this.baseUrl + '/auth/refresh', { headers })
-    .pipe(
-      tap(
-        (tokens: Tokens) => {
-          this.storeJwtToken(tokens.access_token);
-        }
-      ),
-      mapTo(true),
-      catchError(error => {
-        this.presentToast(error);
-        return of(false);
-      })
-    );
+    console.log('we\'re firing off the testRefreshToken()!');
+    let refreshToken = this.getRefreshToken();
+
+    return this.http.post<any>(this.baseUrl + '/auth/refresh', {})
+      .pipe(
+        tap(
+          (tokens: Tokens) => {
+            console.log('token shit');
+            this.storeJwtToken(tokens.access_token);
+          }
+        )
+      );
   }
 
-  private storeJwtToken(jwt: string) {
+  public storeJwtToken(jwt: string) {
     localStorage.setItem(this.JWT_TOKEN, jwt);
   }
 
@@ -125,40 +112,4 @@ export class AuthService {
     return !!this.getJwtToken();
   }
 
-  async presentLoginFailedAlert(){
-    const alert = await this.alertController.create({
-      header: 'Login failed',
-      message: 'Username or password does not match.',
-      buttons: [
-        {
-          text: 'OK',
-          role: 'Ok'
-        },
-      ]
-    });
-    alert.present();
-  }
-
-
-  async presentToast(error) {
-    if (error.error.msg){
-      const toast = await this.toastController.create({
-        message: error.error.msg,
-        icon: 'close-circle-outline',
-        color: 'dark',
-        position: 'bottom',
-        duration: 6000
-      });
-      toast.present();
-    } else {
-        const toast = await this.toastController.create({
-        message: error.error.message,
-        icon: 'close-circle-outline',
-        color: 'dark',
-        position: 'bottom',
-        duration: 6000
-      });
-      toast.present();
-    }
-  }
 }

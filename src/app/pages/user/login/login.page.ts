@@ -39,29 +39,10 @@ export class LoginPage implements OnInit {
     } else {
       this.authService.login(this.ionicForm.value).subscribe(
         (success: any) => {
-          if(success === false){
-            console.log('login failed.')
-          }else{
             console.log('Login was successful.', success);
-          }
-        }, (error: any) => {
-          console.log('Login failed.', error);
         }
       );
     }
   }
 
-  async presentLoginFailedAlert(){
-    const alert = await this.alertController.create({
-      header: 'Login failed',
-      message: 'Username or password does not match.',
-      buttons: [
-        {
-          text: 'OK',
-          role: 'cancel'
-        },
-      ]
-    });
-    alert.present();
-  }
 }

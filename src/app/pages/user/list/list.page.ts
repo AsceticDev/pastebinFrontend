@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { interval } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -12,7 +14,7 @@ export class ListPage implements OnInit {
 
   constructor(
     public userService: UserService,
-    public router:Router
+    public router: Router
   ) { }
 
   ngOnInit() {
@@ -21,21 +23,11 @@ export class ListPage implements OnInit {
 
 
   getUserList(){
-    this.userService.getAllUsers(this.pageUrlEndpoint).subscribe(
-      (success: any) => {
-        if(success === false) {
-          console.log('failed getting user list.');
-        } else {
-          console.log('getting user list success', success);
-        }
-      }, (error: any) => {
-        console.log('failed getting user list.', error);
-      }
-    )
+    this.userService.getAllUsers(this.pageUrlEndpoint).subscribe();
   }
 
   goToUser(userid) {
-    this.router.navigate(['/user/details/' + userid]);
+    this.router.navigate(['/user/' + userid]);
   }
 
 }

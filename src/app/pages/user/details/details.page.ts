@@ -23,13 +23,7 @@ export class DetailsPage implements OnInit {
   getUserData(userid) {
     this.userService.getUser(userid).subscribe(
       (success: any) => {
-        if(success === false) {
-          console.log('failed getting user data.');
-        } else {
           console.log('getting user data success', success);
-        }
-      }, (error: any) => {
-        console.log('failed getting user data.', error);
       }
     )
   }

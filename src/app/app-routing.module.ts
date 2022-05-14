@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
@@ -19,26 +20,33 @@ const routes: Routes = [
   },
   {
     path: 'user/create',
+    canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
     loadChildren: () => import('./pages/user/create/create.module').then( m => m.CreatePageModule)
   },
   {
-    path: 'user/details/:userId',
+    path: 'user/:userId',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./pages/user/details/details.module').then( m => m.DetailsPageModule)
   },
   {
     path: 'user/list',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./pages/user/list/list.module').then( m => m.ListPageModule)
   },
   {
     path: 'paste/create',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./pages/paste/create/create.module').then( m => m.CreatePageModule)
   },
   {
-    path: 'paste/details/:pasteId',
+    path: 'paste/:pasteId',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./pages/paste/details/details.module').then( m => m.DetailsPageModule)
   },
   {
     path: 'paste/list',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./pages/paste/list/list.module').then( m => m.ListPageModule)
   },
 ];

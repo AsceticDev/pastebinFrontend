@@ -65,7 +65,7 @@ export class TokenInterceptor implements HttpInterceptor {
           filter(token => token != null),
           take(1),
           switchMap(access_token => {
-            console.log(access_token)
+            console.log(access_token);
             return next.handle(this.addToken(request, access_token));
         }));
     }

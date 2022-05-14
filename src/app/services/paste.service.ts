@@ -22,55 +22,34 @@ export class PasteService {
   ) { }
 
   createPaste(pasteForm) {
-    let headers = new HttpHeaders();
-    const auth_token = this.authService.getJwtToken();
-    headers = headers.set('Authorization', `Bearer ${auth_token}`);
 
-    return this.http.post<any>(this.baseUrl+'/api/v1/pastes', pasteForm, {headers})
+    return this.http.post<any>(this.baseUrl+'/api/v1/pastes', pasteForm)
     .pipe(
       tap(
         res => {
           console.log(res);
           console.log('creating paste');
         }
-      ),
-      mapTo(true),
-      catchError(error => {
-        console.log(error);
-        this.presentToast(error);
-        return of(false);
-      })
+      )
     )
   }
 
   getPaste(pasteId) {
-    let headers = new HttpHeaders();
-    const auth_token = this.authService.getJwtToken();
-    headers = headers.set('Authorization', `Bearer ${auth_token}`);
 
-    return this.http.get<any>(this.baseUrl+'/api/v1/pastes/'+pasteId, {headers})
+    return this.http.get<any>(this.baseUrl+'/api/v1/pastes/'+pasteId)
     .pipe(
       tap(
         res => {
           this.pasteDetailsStorage = res.paste;
           console.log('getting paste');
         }
-      ),
-      mapTo(true),
-      catchError(error => {
-        console.log(error);
-        this.presentToast(error);
-        return of(false);
-      })
+      )
     )
   }
 
   getAllPastes(paginationUrl) {
-    let headers = new HttpHeaders();
-    const auth_token = this.authService.getJwtToken();
-    headers = headers.set('Authorization', `Bearer ${auth_token}`);
 
-    return this.http.get<any>(this.baseUrl+paginationUrl, {headers})
+    return this.http.get<any>(this.baseUrl+paginationUrl)
     .pipe(
       tap(
         res => {
@@ -79,21 +58,12 @@ export class PasteService {
           console.log('getting all pastes');
         }
       ),
-      mapTo(true),
-      catchError(error => {
-        console.log(error);
-        this.presentToast(error);
-        return of(false);
-      })
     );
   }
 
   updatePaste(id: any, pasteData) {
-    let headers = new HttpHeaders();
-    const auth_token = this.authService.getJwtToken();
-    headers = headers.set('Authorization', `Bearer ${auth_token}`);
 
-    return this.http.put<any>(this.baseUrl+`/${id}`, pasteData, {headers})
+    return this.http.put<any>(this.baseUrl+`/${id}`, pasteData)
     .pipe(
       tap(
         res => {
@@ -101,21 +71,12 @@ export class PasteService {
           console.log('updating paste');
         }
       ),
-      mapTo(true),
-      catchError(error => {
-        console.log(error);
-        this.presentToast(error);
-        return of(false);
-      })
     );
   }
 
   deletePaste(id: any) {
-    let headers = new HttpHeaders();
-    const auth_token = this.authService.getJwtToken();
-    headers = headers.set('Authorization', `Bearer ${auth_token}`);
 
-    return this.http.delete<any>(this.baseUrl+`/${id}`, {headers})
+    return this.http.delete<any>(this.baseUrl+`/${id}`)
     .pipe(
       tap(
         res => {
@@ -123,26 +84,7 @@ export class PasteService {
           console.log('deleting paste');
         }
       ),
-      mapTo(true),
-      catchError(error => {
-        console.log(error);
-        this.presentToast(error);
-        return of(false);
-      })
     );
-  }
-
-
-
-  async presentToast(error) {
-    const toast = await this.toastController.create({
-      message: error.error.msg,
-      icon: 'close-circle-outline',
-      color: 'dark',
-      position: 'bottom',
-      duration: 6000
-    });
-    toast.present();
   }
 
 }

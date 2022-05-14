@@ -34,7 +34,7 @@ export class ListPage implements OnInit {
   }
 
   goToPaste(pasteId) {
-    this.router.navigate(['/paste/details/' + pasteId]);
+    this.router.navigate(['/paste/' + pasteId]);
   }
 
 }
