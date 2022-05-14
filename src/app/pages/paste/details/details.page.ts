@@ -9,6 +9,7 @@ import { PasteService } from 'src/app/services/paste.service';
 })
 export class DetailsPage implements OnInit {
   public pasteId: any;
+  public author: any;
 
   constructor(
     public activatedRoute: ActivatedRoute,
@@ -21,21 +22,11 @@ export class DetailsPage implements OnInit {
   }
 
   getPasteData(pasteId) {
-    this.pasteService.getPaste(pasteId).subscribe(
-      (success: any) => {
-        if(success === false) {
-          console.log('failed getting paste data.');
-        } else {
-          console.log('getting paste data success', success);
-        }
-      }, (error: any) => {
-        console.log('failed getting paste data.', error);
-      }
-    )
+    this.pasteService.getPaste(pasteId).subscribe();
   }
 
   booba(){
-    console.log(this.pasteService.pasteDetailsStorage)
+    console.log(this.pasteService.pasteDetailsStorage);
   }
 
 }

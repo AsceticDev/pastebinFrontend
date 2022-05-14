@@ -1,7 +1,8 @@
 <app-toolbar></app-toolbar>
 
-<ion-content mode="md" class="" style="--background: url('https://www.pngmagic.com/product_images/website-background-image-size-psd-vector-photo.jpg')" >
-  <ion-card class="mx-auto lg:top-1/3 md:w-1/3 top-1/3 sm:w-full top-auto">
+<ion-content mode="md" class="" style="--background: url('../assets/background.jpg')" >
+
+  <ion-card *ngIf="pasteService.pasteDetailsStorage" class="mx-auto md:w-2/3 sm:w-full top-auto">
     <ion-card-header class="flex flex-row justify-center">
       <ion-card-title class="text-3xl">Paste Details</ion-card-title>
     </ion-card-header>
@@ -12,10 +13,18 @@
         {{pasteService.pasteDetailsStorage.title}}
       </ion-item>
 
-      <ion-item>
+      <ion-item *ngIf="pasteService.pasteDetailsStorage.author">
         <ion-label>Author</ion-label>
-        {{pasteService.pasteDetailsStorage.author}}
+        {{pasteService.pasteDetailsStorage.author.username}}
       </ion-item>
+
+      <ion-text >
+          <pre>
+            <code [highlight]='code'>
+              <p>{{pasteService.pasteDetailsStorage.content}}</p>
+            </code>
+          </pre>
+      </ion-text>
 
 
     </ion-card-content>

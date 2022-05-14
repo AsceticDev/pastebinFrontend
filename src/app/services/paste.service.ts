@@ -11,7 +11,7 @@ import { AuthService } from './auth.service';
 })
 export class PasteService {
   public baseUrl = 'http://localhost:5000';
-  public pasteDetailsStorage = [];
+  public pasteDetailsStorage = {};
   public pasteList: any = [];
 
   constructor(

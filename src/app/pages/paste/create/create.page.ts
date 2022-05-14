@@ -40,7 +40,7 @@ export class CreatePage implements OnInit {
       this.pasteService.createPaste(this.ionicForm.value).subscribe(
         (success: any) => {
             console.log('user creation was successful', success);
-            this.router.navigateByUrl('/paste/' + success.paste.id);
+            this.router.navigateByUrl('/paste/details/' + success.paste.id);
         }
       )
     }

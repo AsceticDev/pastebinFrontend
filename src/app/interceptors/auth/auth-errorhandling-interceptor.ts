@@ -57,8 +57,8 @@ export class AuthErrorhandlingInterceptor implements HttpInterceptor {
                 switchMap((token: any) => {
                     console.log('switchmap refreshToken() func from pipe \n return token here: ', token);
                     this.isRefreshing = false;
-                    this.refreshTokenSubject.next(token.jwt)
-                    return next.handle(this.addTokenHeader(request, token.jwt));
+                    this.refreshTokenSubject.next(token.access_token)
+                    return next.handle(this.addTokenHeader(request, token.access_token));
                 }));
         } else {
             console.log('in else statement of if is refreshing');
