@@ -20,14 +20,17 @@ export class AuthHeaderInterceptor implements HttpInterceptor {
         if(!auth_token){
             console.log('empty token');
         }
-        let reqWithAuth = this.addTokenHeader(req, auth_token);
+        const reqWithAuth = this.addTokenHeader(req, auth_token);
 
         if (req.url.includes('auth/refresh')){
             const refresh_token = this.authService.getRefreshToken();
-            reqWithAuth = this.addTokenHeader(req, refresh_token);
-        } 
+            const reqRefresh = this.addTokenHeader(req, refresh_token);
+            return next.handle(reqRefresh);
+        }else {
 
-        return next.handle(reqWithAuth);
+            return next.handle(reqWithAuth);
+        }
+
 
     }
     //functions

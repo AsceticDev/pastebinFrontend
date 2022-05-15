@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-details',
-  templateUrl: './details.page.html',
-  styleUrls: ['./details.page.scss'],
+  selector: 'app-user-paste-list',
+  templateUrl: './user-paste-list.page.html',
+  styleUrls: ['./user-paste-list.page.scss'],
 })
-export class DetailsPage implements OnInit {
+export class UserPasteListPage implements OnInit {
   public userId: any;
 
   constructor(
@@ -18,6 +18,7 @@ export class DetailsPage implements OnInit {
 
   ngOnInit() {
     this.userId = this.activatedRoute.snapshot.params.userId;
+    console.log(this.userId)
     this.getUserData(this.userId);
   }
 
@@ -25,14 +26,13 @@ export class DetailsPage implements OnInit {
     this.userService.getUser(userid).subscribe(
       (success: any) => {
           console.log('getting user data success', success);
+          console.log(this.userService.userDetailsStorage);
       }
     )
   }
 
-
-  goToPastes(){
-    this.router.navigate(['/user/details/paste-list/' + this.userId]);
-
+  goToPasteDetail(pasteId) {
+    this.router.navigate(['/paste/details/' + pasteId]);
   }
 
 }

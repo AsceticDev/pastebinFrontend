@@ -35,6 +35,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/user/list/list.module').then( m => m.ListPageModule)
   },
   {
+    path: 'user/details/paste-list/:userId',
+    loadChildren: () => import('./pages/user/user-paste-list/user-paste-list.module').then( m => m.UserPasteListPageModule)
+  },
+  {
     path: 'paste/create',
     canActivate: [AuthGuard],
     loadChildren: () => import('./pages/paste/create/create.module').then( m => m.CreatePageModule)
@@ -49,6 +53,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./pages/paste/list/list.module').then( m => m.ListPageModule)
   },
+
 ];
 
 @NgModule({

@@ -66,7 +66,10 @@ export class AuthService {
   public refreshToken() {
 
     console.log('we\'re firing off the testRefreshToken()!');
-    let refreshToken = this.getRefreshToken();
+
+    // let headers = new HttpHeaders();
+    // const refresh_token = this.getRefreshToken();
+    // headers = headers.set('Authorization', `Bearer ${refresh_token}`);
 
     return this.http.post<any>(this.baseUrl + '/auth/refresh', {})
       .pipe(
