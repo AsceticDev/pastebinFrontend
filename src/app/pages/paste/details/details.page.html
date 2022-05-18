@@ -2,13 +2,13 @@
 
 <ion-content mode="md" class="" style="--background: url('../assets/background.jpg')" >
 
-  <ion-card *ngIf="pasteService.pasteDetailsStorage" class="mx-auto md:w-2/3 sm:w-full top-auto">
+  <ion-card *ngIf="pasteService.pasteDetailsStorage" class="mx-auto lg:w-2/3 md:w-3/3 sm:w-full top-auto">
     <ion-card-header class="flex flex-row justify-center">
       <ion-card-title class="text-3xl">Paste Details</ion-card-title>
     </ion-card-header>
     <ion-card-content>
 
-      <ion-item (click)="booba()">
+      <ion-item>
         <ion-label>Title</ion-label>
         {{pasteService.pasteDetailsStorage.title}}
       </ion-item>
@@ -18,17 +18,25 @@
         {{pasteService.pasteDetailsStorage.author.username}}
       </ion-item>
 
-      <ion-text >
-          <pre>
-            <code [highlight]="code">
-              <p>{{pasteService.pasteDetailsStorage.content}}</p>
-            </code>
+      <ion-icon name="star" (click)="toggleHighlight()" class="hover:text-sky-500"></ion-icon>
+
+      <ion-text>
+          <pre *ngIf="isToggled">
+            <code [highlight]="code"></code>
           </pre>
+
+          <p *ngIf="!isToggled">
+            {{pasteService.pasteDetailsStorage.content}}
+          <p>
       </ion-text>
+
 
 
     </ion-card-content>
   </ion-card>
 
+      <!-- <pre>
+        <code [highlight]="code"></code>
+      </pre> -->
 </ion-content>
 

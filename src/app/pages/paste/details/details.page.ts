@@ -10,6 +10,9 @@ import { PasteService } from 'src/app/services/paste.service';
 export class DetailsPage implements OnInit {
   public pasteId: any;
   public author: any;
+  public isToggled: boolean = true
+  
+  public code = '';
 
   constructor(
     public activatedRoute: ActivatedRoute,
@@ -22,7 +25,15 @@ export class DetailsPage implements OnInit {
   }
 
   getPasteData(pasteId) {
-    this.pasteService.getPaste(pasteId).subscribe();
+    this.pasteService.getPaste(pasteId).subscribe(
+      (success) => {
+        this.code = success.paste.content;
+      }
+    );
+  }
+
+  toggleHighlight(){
+    this.isToggled = !this.isToggled;
   }
 
   booba(){

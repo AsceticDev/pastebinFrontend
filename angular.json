@@ -31,8 +31,13 @@
                 "output": "./svg"
               }
             ],
-            "styles": ["src/theme/variables.scss", "src/global.scss"],
-            "scripts": [],
+            "styles": [
+              "src/theme/variables.scss", "src/global.scss",
+              "./node_modules/highlight.js/styles/default.css"
+            ],
+            "scripts": [
+              "./node_modules/highlight.js/lib/index.js"
+            ],
             "aot": false,
             "vendorChunk": true,
             "extractLicenses": false,

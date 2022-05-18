@@ -8,6 +8,8 @@ import { DetailsPageRoutingModule } from './details-routing.module';
 
 import { DetailsPage } from './details.page';
 import { SharedModule } from 'src/app/components/shared.module';
+import { HighlightModule, HIGHLIGHT_OPTIONS} from 'ngx-highlightjs';
+
 
 @NgModule({
   imports: [
@@ -15,8 +17,16 @@ import { SharedModule } from 'src/app/components/shared.module';
     FormsModule,
     IonicModule,
     DetailsPageRoutingModule,
-    SharedModule
+    SharedModule,
+    HighlightModule
   ],
-  declarations: [DetailsPage]
+  declarations: [DetailsPage],
+  providers: [
+, {
+    provide: HIGHLIGHT_OPTIONS,
+    useValue: {
+      fullLibraryLoader: () => import('highlight.js'),
+  }
+}]
 })
 export class DetailsPageModule {}
