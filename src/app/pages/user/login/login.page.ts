@@ -37,7 +37,9 @@ export class LoginPage implements OnInit {
       console.log('Please provide all required fields.');
       return false;
     } else {
-      this.authService.login(this.ionicForm.value).subscribe(
+		console.log('ping pong');
+		console.log(this.ionicForm.value);
+	  this.authService.login(this.ionicForm.value).subscribe(
         (success: any) => {
             console.log('Login was successful.', success);
         }

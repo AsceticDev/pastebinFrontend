@@ -63,7 +63,7 @@ export class PasteService {
 
   updatePaste(id: any, pasteData) {
 
-    return this.http.put<any>(this.baseUrl+`/${id}`, pasteData)
+    return this.http.put<any>(this.baseUrl+`/api/v1/pastes/${id}`, pasteData)
     .pipe(
       tap(
         res => {

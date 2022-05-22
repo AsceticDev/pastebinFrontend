@@ -8,9 +8,14 @@
     </ion-card-header>
     <ion-card-content>
 
+
+    <div *ngIf="!isEditingToggled">
+
       <ion-item>
         <ion-label>Title</ion-label>
-        {{pasteService.pasteDetailsStorage.title}}
+        <h2 *ngIf="!isEditingToggled"> 
+           {{pasteService.pasteDetailsStorage.title}}
+        </h2>
       </ion-item>
 
       <ion-item *ngIf="pasteService.pasteDetailsStorage.author">
@@ -18,25 +23,79 @@
         {{pasteService.pasteDetailsStorage.author.username}}
       </ion-item>
 
-      <ion-icon name="star" (click)="toggleHighlight()" class="hover:text-sky-500"></ion-icon>
+      <ion-item>
+        <ion-icon name="star" (click)="toggleHighlight()" class="hover:text-sky-500"></ion-icon>
+        <ion-button *ngIf="!isEditingToggled" slot="end" (click)="toggleEditing()">Edit</ion-button>
+        <ion-button *ngIf="isEditingToggled" slot="end" (click)="updatePaste(code)">Save</ion-button>
+      </ion-item>
 
-      <ion-text>
-          <pre *ngIf="isToggled">
+      <ion-text >
+        <!-- if this is toggled display code w/ highlight-->
+          <pre *ngIf="isHighlightToggled">
             <code [highlight]="code"></code>
           </pre>
 
-          <p *ngIf="!isToggled">
+        <!-- if not display content without highlight-->
+          <p *ngIf="!isHighlightToggled">
             {{pasteService.pasteDetailsStorage.content}}
           <p>
       </ion-text>
 
+    </div>
 
+    <div *ngIf="isEditingToggled">
+
+
+      <form [formGroup]="ionicForm" (ngSubmit)="editPaste()" class="" novalidate *ngIf="code"  >
+
+          <ion-item>
+            <ion-label>Title</ion-label>
+            <ion-input *ngIf="paste.title" slot="end" [(ngModel)]="paste.title" formControlName="title" class="bg-orange-100">
+            </ion-input>
+          </ion-item>
+
+          <ion-item *ngIf="pasteService.pasteDetailsStorage.author">
+            <ion-label>Author</ion-label>
+            {{pasteService.pasteDetailsStorage.author.username}}
+          </ion-item>
+
+
+          <ion-item>
+            <ion-button *ngIf="!isEditingToggled" slot="end" (click)="toggleEditing()">Edit</ion-button>
+            <ion-button *ngIf="isEditingToggled" slot="end" (click)="updatePaste(code)">Save</ion-button>
+          </ion-item>
+
+        <ion-item class="">
+          <ion-textarea auto-grow="true" class="bg-orange-100" [(ngModel)]="code" formControlName="content" placeholder="Code Goes Here...">
+          </ion-textarea>
+        </ion-item>
+
+          <ion-item>
+            <ion-label class="">Enable Expiration</ion-label>
+            <ion-checkbox checked="false"></ion-checkbox>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Paste Expiration</ion-label>
+            <ion-datetime presentation="date" [(ngModel)]="date"></ion-datetime>
+          </ion-item>
+
+          <ion-item>
+            <ion-label class="">Enabled Encryption</ion-label>
+            <ion-checkbox slot="" checked="false"></ion-checkbox>
+          </ion-item>
+
+          <ion-item >
+            <ion-label class="">Password</ion-label>
+            <ion-input class="bg-orange-100" slot="end"></ion-input>
+          </ion-item>
+
+      </form>
+
+    </div>
 
     </ion-card-content>
   </ion-card>
 
-      <!-- <pre>
-        <code [highlight]="code"></code>
-      </pre> -->
 </ion-content>
 
