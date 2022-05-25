@@ -20,25 +20,42 @@ export class AuthErrorhandlingInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-        return next.handle(req)
-        .pipe(
-            //retry on failure
-            retry(2),
+        //Add Auth Token
+        const auth_token = this.authService.getJwtToken();
+        if(!auth_token){
+            console.log('empty token');
+        }
+        const reqWithAuth = this.addTokenHeader(req, auth_token);
 
-            // Handle errors
-            catchError((error: HttpErrorResponse) => {
-                if(error instanceof HttpErrorResponse && !req.url.includes('auth/login') && error.status === 401) {
-                    console.log('not login and 401 status error');
-                    return this.handle401Error(req, next);
-                }else if(error instanceof HttpErrorResponse && error.status === 422) {
-                    this.handle422Error();
-                }
-                //add error handling logic here
-                console.log('request url:', req.url)
-                this.presentToast(error);
-                return throwError(error);
-            })
-        );
+        if (req.url.includes('auth/refresh')){
+            const refresh_token = this.authService.getRefreshToken();
+            const reqRefresh = this.addTokenHeader(req, refresh_token);
+
+            return next.handle(reqRefresh);
+
+        }else {
+
+            return next.handle(req)
+            .pipe(
+                //retry on failure
+                retry(1),
+
+                // Handle errors
+                catchError((error: HttpErrorResponse) => {
+                    if(error instanceof HttpErrorResponse && !req.url.includes('auth/login') && error.status === 401) {
+                        console.log('not login and 401 status error');
+                        return this.handle401Error(req, next);
+                    }else if(error instanceof HttpErrorResponse && error.status === 422) {
+                        this.handle422Error();
+                    }
+                    //add error handling logic here
+                    console.log('request url:', req.url)
+                    this.presentToast(error);
+                    return throwError(error);
+                })
+            );
+
+        }
 
 
     }
@@ -58,6 +75,8 @@ export class AuthErrorhandlingInterceptor implements HttpInterceptor {
                     console.log('switchmap refreshToken() func from pipe \n return token here: ', token);
                     this.isRefreshing = false;
                     this.refreshTokenSubject.next(token.access_token)
+                    console.log('this is the refresh token subject: ');
+                    this.refreshTokenSubject.subscribe(console.log);
                     return next.handle(this.addTokenHeader(request, token.access_token));
                 }));
         } else {
@@ -76,6 +95,7 @@ export class AuthErrorhandlingInterceptor implements HttpInterceptor {
     private handle422Error() {
         console.log('422 error, prob empty token or expired');
         localStorage.clear();
+        this.authService.logout();
         this.router.navigateByUrl('/login');
     }
 

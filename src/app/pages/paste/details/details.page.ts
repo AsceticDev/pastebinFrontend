@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { PasteService } from 'src/app/services/paste.service';
 import { UserService } from 'src/app/services/user.service';
+import { format, parseISO } from 'date-fns';
 
 @Component({
   selector: 'app-details',
@@ -42,6 +43,10 @@ export class DetailsPage implements OnInit {
     this.ionicForm = this.formBuilder.group({
       title: ['', [Validators.required, Validators.minLength(2)]],
       content : ['', [Validators.required, Validators.minLength(10)]],
+      encrypted: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(2)]],
+      hasExpiration: ['', [Validators.required]],
+      expirationDate: ['', [Validators.required]],
     })
   }
 
@@ -50,6 +55,7 @@ export class DetailsPage implements OnInit {
       (success) => {
         this.code = success.paste.content;
         this.paste = success.paste      
+        console.log('pasteeeee: ',this.paste);
       }
     );
   }
@@ -79,6 +85,21 @@ export class DetailsPage implements OnInit {
     }
   }
 
+  updateEncryptedBool(){
+    this.paste.encrypted = !this.paste.encrypted;
+  }
+
+  updateExpirationBool(){
+    this.paste.hasExpiration = !this.paste.hasExpiration
+  }
+
+  showDate(){
+    console.log(this.paste.expirationDate);
+  }
+
+  formatDate(value: string) {
+    return format(parseISO(value), 'MMM dd yyyy');
+  }
 
   booba(){
     console.log(this.pasteService.pasteDetailsStorage);

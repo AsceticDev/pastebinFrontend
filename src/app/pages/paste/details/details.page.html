@@ -43,7 +43,7 @@
 
     </div>
 
-    <div *ngIf="isEditingToggled">
+    <div *ngIf="isEditingToggled" class="">
 
 
       <form [formGroup]="ionicForm" (ngSubmit)="editPaste()" class="" novalidate *ngIf="code"  >
@@ -70,24 +70,30 @@
           </ion-textarea>
         </ion-item>
 
-          <ion-item>
+          <ion-item class="flex" >
             <ion-label class="">Enable Expiration</ion-label>
-            <ion-checkbox checked="false"></ion-checkbox>
+            <ion-checkbox formControlName="hasExpiration" [(ngModel)]="paste.hasExpiration"></ion-checkbox>
           </ion-item>
 
-          <ion-item>
-            <ion-label>Paste Expiration</ion-label>
-            <ion-datetime presentation="date" [(ngModel)]="date"></ion-datetime>
+
+          <ion-item *ngIf="paste.hasExpiration" class="flex">
+            <ion-datetime class="flex mx-auto"
+                formControlName="expirationDate"
+                #popoverDatetime
+                [(ngModel)]="paste.expirationDate"
+                (ionChange)="paste.expirationDate = popoverDatetime.value"
+                >
+            </ion-datetime>
+        </ion-item>
+
+          <ion-item class="flex">
+            <ion-label>Enabled Encryption</ion-label>
+            <ion-checkbox formControlName="encrypted" [(ngModel)]="paste.encrypted"></ion-checkbox>
           </ion-item>
 
-          <ion-item>
-            <ion-label class="">Enabled Encryption</ion-label>
-            <ion-checkbox slot="" checked="false"></ion-checkbox>
-          </ion-item>
-
-          <ion-item >
+          <ion-item *ngIf="paste.encrypted">
             <ion-label class="">Password</ion-label>
-            <ion-input class="bg-orange-100" slot="end"></ion-input>
+            <ion-input type="password" formControlName="password" class="bg-orange-100" slot="end"></ion-input>
           </ion-item>
 
       </form>
