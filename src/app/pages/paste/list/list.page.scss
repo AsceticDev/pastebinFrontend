@@ -1,0 +1,11 @@
+ion-item {
+    margin-bottom: 8px;
+    --background: #D0D0D0;
+    //color: white;
+    box-shadow: .2em .2em .2em rgba(0, 0, 0, 0.2);
+    &:hover {
+        --background:#E8E8E8;
+        border: 2px solid black;
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0.2);
+    }
+}

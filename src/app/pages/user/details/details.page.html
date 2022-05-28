@@ -1,8 +1,8 @@
 <app-toolbar></app-toolbar>
 
 <ion-content mode="md" class="" style="--background: url('../assets/background.jpg')" >
-  <ion-card class="mx-auto lg:top-1/3 md:w-1/3 top-1/3 sm:w-full top-auto">
-    <ion-card-header class="flex flex-row justify-center">
+  <ion-card class="mx-auto mt-20 lg: md:w-1/3 sm:w-full top-auto">
+    <ion-card-header class="mt-10 mb-10 flex flex-row justify-center">
       <ion-card-title class="text-3xl">User Details</ion-card-title>
     </ion-card-header>
     <ion-card-content>
@@ -17,7 +17,7 @@
         {{userService.userDetailsStorage.email}}
       </ion-item>
 
-      <ion-button (click)="goToPastes()">View Pastes</ion-button>
+      <ion-button (click)="goToPastes()" class="mt-10 flex">View Pastes</ion-button>
 
 
     </ion-card-content>

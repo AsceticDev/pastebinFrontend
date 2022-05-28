@@ -2,27 +2,30 @@
 
 <ion-content mode="md" style="--background: url('../assets/background.jpg')">
 
-  <ion-card class="mx-auto lg:w-2/3 md:w-2/3 sm:top-auto">
-    <ion-card-header class="flex flex-row justify-center">
-      <ion-card-title class="text-3xl">Create Paste</ion-card-title>
+  <ion-card class="lg:mt-20 md: sm:mt-1 " style="--background:#f8f8ff;">
+
+
+    <ion-card-header class="">
+      <ion-card-title class="pt-10 text-3xl text-black text-center">Create Paste</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
       <form [formGroup]="ionicForm" (ngSubmit)="createPaste()" class="" novalidate>
 
-        <ion-item class="">
+        <ion-item class="mb-10 mx-auto mt-10 " style="--background:#D0D0D0">
           <ion-label class="" position="floating">Title</ion-label>
-          <ion-input class="" formControlName="title"  placeholder="Your Title">
+          <ion-input class="" style="" formControlName="title"  placeholder="Your Title">
           </ion-input>
         </ion-item>
 
-        <ion-item class="">
+        <ion-item class="" style="--background:#D0D0D0; --min-height:300px">
           <ion-label position="floating">Content</ion-label>
-          <ion-textarea auto-grow="true" formControlName="content" placeholder="Code Goes Here..."></ion-textarea>
+          <ion-textarea class="" style="" auto-grow="true" formControlName="content" placeholder="Code Goes Here..."></ion-textarea>
         </ion-item>
 
-
-        <ion-button type="submit" color="primary" expand="block">Submit</ion-button>
+        <div class="text-center">
+            <ion-button size="large" class="w-2/3 mt-10 mb-10" type="submit" color="primary" style="" >Submit</ion-button>
+        </div>
 
       </form>
     </ion-card-content>

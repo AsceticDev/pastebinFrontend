@@ -1,0 +1,14 @@
+<app-toolbar></app-toolbar>
+
+<ion-content mode="md" class="pt-50" style="--background: url('../assets/background.jpg')" >
+
+    <ion-card class="mx-auto lg:w-2/3 mt-10 md:w-2/3 mt-5 sm:w-full top-auto" style="--background: #15151d;">
+        <ion-card-header class="flex flex-row justify-center">
+          <ion-card-title class="text-3xl text-white">Home</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            weeee
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>

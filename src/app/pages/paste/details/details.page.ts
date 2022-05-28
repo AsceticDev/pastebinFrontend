@@ -43,10 +43,10 @@ export class DetailsPage implements OnInit {
     this.ionicForm = this.formBuilder.group({
       title: ['', [Validators.required, Validators.minLength(2)]],
       content : ['', [Validators.required, Validators.minLength(10)]],
-      encrypted: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(2)]],
-      hasExpiration: ['', [Validators.required]],
-      expirationDate: ['', [Validators.required]],
+      encrypted: ['',],
+      password: ['',],
+      hasExpiration: [''],
+      expirationDate: [null,],
     })
   }
 
@@ -55,7 +55,7 @@ export class DetailsPage implements OnInit {
       (success) => {
         this.code = success.paste.content;
         this.paste = success.paste      
-        console.log('pasteeeee: ',this.paste);
+        //console.log('paste: ',this.paste);
       }
     );
   }

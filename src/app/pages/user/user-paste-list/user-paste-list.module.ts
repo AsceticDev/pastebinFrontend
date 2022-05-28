@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { UserPasteListPageRoutingModule } from './user-paste-list-routing.module';
 
 import { UserPasteListPage } from './user-paste-list.page';
+import { SharedModule } from 'src/app/components/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    UserPasteListPageRoutingModule
+    UserPasteListPageRoutingModule,
+    SharedModule
   ],
   declarations: [UserPasteListPage]
 })

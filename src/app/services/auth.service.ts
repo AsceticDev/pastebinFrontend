@@ -32,7 +32,7 @@ export class AuthService {
       .pipe(
         tap(
           tokens => {
-            console.log('setting token');
+            //console.log('setting token');
  
             this.doLoginUser(loginDict.username, tokens),
             this.router.navigate(['/home'])
@@ -51,31 +51,26 @@ export class AuthService {
 
   private doLoginUser(username: string, tokens: Tokens) {
     const decoded_token: any = jwt_decode(tokens.access_token);
-    console.log('Decoded Token: ', decoded_token);
+    //console.log('Decoded Token: ', decoded_token);
     this.loggedUser.username = username;
     this.loggedUser.id = decoded_token.sub;
     this.storeTokens(tokens);
   }
 
   private doLogoutUser() {
-    console.log('logging user out');
+    //console.log('logging user out');
     this.loggedUser = null;
     this.removeTokens();
   }
 
   public refreshToken() {
 
-    console.log('we\'re firing off the testRefreshToken()!');
-
-    // let headers = new HttpHeaders();
-    // const refresh_token = this.getRefreshToken();
-    // headers = headers.set('Authorization', `Bearer ${refresh_token}`);
 
     return this.http.post<any>(this.baseUrl + '/auth/refresh', {})
       .pipe(
         tap(
           (tokens: Tokens) => {
-            console.log('token shit');
+            //console.log('token shit');
             this.storeJwtToken(tokens.access_token);
           }
         )

@@ -32,7 +32,7 @@ export class DetailsPage implements OnInit {
   getUserData(userid) {
     this.userService.getUser(userid).subscribe(
       (success: any) => {
-          console.log('getting user data success', success);
+          //console.log('getting user data success', success);
       }
     )
   }

@@ -1,13 +1,17 @@
+<app-toolbar></app-toolbar>
 
 <ion-content mode="md" class="" style="--background: url('../assets/background.jpg')">
-  <ion-card class="mx-auto lg:top-1/3 md:w-1/3 top-1/3 sm:w-full top-auto">
-    <ion-card-header class="flex flex-row justify-center">
-      <ion-card-title class="text-3x1">{{userService.userDetailsStorage.username}}Paste List</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
 
-      <ion-item *ngFor="let paste of userService.userDetailsStorage.pastes">
-        <ion-label (click)="goToPasteDetail(paste.id)">{{paste.title}}</ion-label>
+  <ion-card class="mx-auto mt-20 lg: md:w-1/3 sm:w-full top-auto" style="--background: #f8f8ff;">
+
+    <ion-card-header class="mt-10 mb-10 flex flex-row justify-center">
+      <ion-card-title class="text-3xl text-black">{{userService.userDetailsStorage.username}} Paste List</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content class="flex flex-col">
+
+      <ion-item class="mx-auto" *ngFor="let paste of userService.userDetailsStorage.pastes">
+        <ion-label class="" (click)="goToPasteDetail(paste.id)">{{paste.title}}</ion-label>
       </ion-item>
 
     </ion-card-content>

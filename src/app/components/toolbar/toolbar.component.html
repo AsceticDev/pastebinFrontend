@@ -1,15 +1,12 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="primary" class="flex">
-    <div class="toolbarWrapperDiv">
-      <!-- <img src="./assets/images/linklogo.svg" alt="" id="toolbarlogo"> -->
-      <ion-title class="toolbarTitle" >
-          <h1>PasteBin Clone</h1>
+<ion-header [translucent]="true" mode="md">
+  <ion-toolbar color="primary" class="flex h-20">
+      <ion-title class="flex">
+          <h1 class="text-center text-white">
+              <img src="../assets/pastebin_logo.png" class="h-6 lg:h-10 md:h-10" style="display:inline;">
+              PasteBin Clone 
+          </h1>
       </ion-title>
-      <ion-buttons slot="primary" class="toolbarIonButtons">
-        <ion-button *ngIf="userService"></ion-button>
 
-      </ion-buttons>
-    </div>
   </ion-toolbar>
 
 </ion-header>

@@ -42,9 +42,7 @@ export class UserService {
     .pipe(
       tap(
         res => {
-          console.log('res here: ',res);
           this.userDetailsStorage = res.user;
-          console.log('getting user');
         }
       )
     )
@@ -56,9 +54,7 @@ export class UserService {
     .pipe(
       tap(
         res => {
-          console.log('res here: ',res);
           this.userList = res;
-          console.log('getting user list');
         }
       )
     );

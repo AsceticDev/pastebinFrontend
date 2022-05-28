@@ -1,0 +1,6 @@
+ion-item{
+    &:hover {
+        --background: white;
+    }
+    --background: #bbb7ef;
+}
